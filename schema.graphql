@@ -1,3 +1,8 @@
+interface Timeseries {
+  id: Int8!
+  timestamp: Int8!
+}
+
 type Assign @entity(immutable: true) {
   id: Bytes!
   to: Bytes! # address
@@ -57,8 +62,9 @@ type PunkBidWithdrawn @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type PunkBought @entity(immutable: true) {
-  id: Bytes!
+type PunkBought implements Timeseries @entity(timeseries: true) {
+  id: Int8! # set by aggregation
+  timestamp: Int8! # set by aggregation
   punkIndex: BigInt! # uint256
   value: BigInt! # uint256
   fromAddress: Bytes! # address
