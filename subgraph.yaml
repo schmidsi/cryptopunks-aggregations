@@ -1,4 +1,4 @@
-specVersion: 1.0.0
+specVersion: 1.1.0
 indexerHints:
   prune: auto
 schema:
@@ -10,7 +10,8 @@ dataSources:
     source:
       address: "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB"
       abi: CryptoPunks
-      startBlock: 3914495
+      # startBlock: 3914495 # Original
+      startBlock: 19113745 # 30 days ago
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
