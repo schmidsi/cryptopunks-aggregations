@@ -62,7 +62,7 @@ type PunkBidWithdrawn @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type PunkBought implements Timeseries @entity(timeseries: true) {
+type PunkBought @entity(timeseries: true) {
   id: Int8! # set by aggregation
   timestamp: Int8! # set by aggregation
   punkIndex: BigInt! # uint256
@@ -72,6 +72,12 @@ type PunkBought implements Timeseries @entity(timeseries: true) {
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+}
+
+type Stats @aggregation(intervals: ["hour", "day"], source: "PunkBought") {
+  id: Int8!
+  timestamp: Int8!
+  volume: BigInt! @aggregate(fn: "sum", arg: "value")
 }
 
 type PunkNoLongerForSale @entity(immutable: true) {
