@@ -64,7 +64,7 @@ type PunkBidWithdrawn @entity(immutable: true) {
 
 type PunkBought @entity(timeseries: true) {
   id: Int8! # set by aggregation
-  timestamp: Int8! # set by aggregation
+  timestamp: Timestamp! # set by aggregation
   punkIndex: BigInt! # uint256
   value: BigInt! # uint256
   fromAddress: Bytes! # address
@@ -76,7 +76,7 @@ type PunkBought @entity(timeseries: true) {
 
 type Stats @aggregation(intervals: ["hour", "day"], source: "PunkBought") {
   id: Int8!
-  timestamp: Int8!
+  timestamp: Timestamp!
   volume: BigInt! @aggregate(fn: "sum", arg: "value")
 }
 
@@ -87,3 +87,4 @@ type PunkNoLongerForSale @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
